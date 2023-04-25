@@ -24,16 +24,32 @@
           <div class="nav-menu">
             <ul class="nav-list">
               <li class="nav-item">
-                <a href="Index.html" class="nav-link">HOME</a>
+                <a
+                  href="{{ url_for('.Dashboard', _anchor='exactlocation') }}"
+                  class="nav-link"
+                  >DASHBOARD</a
+                >
               </li>
               <li class="nav-item">
-                <a href="Mission.html" class="nav-link">MISSION</a>
+                <a
+                  href="{{ url_for('.Requestlist', _anchor='exactlocation') }}"
+                  class="nav-link"
+                  >REQUEST POOL</a
+                >
               </li>
               <li class="nav-item">
-                <a href="AboutUs.html" class="nav-link">ABOUT</a>
+                <a
+                  href="{{ url_for('.Donationlist', _anchor='exactlocation') }}"
+                  class="nav-link"
+                  >DONATION POOL</a
+                >
               </li>
               <li class="nav-item">
-                <a href="Contact.html" class="nav-link">CONTACT</a>
+                <a
+                  href="{{ url_for('.homeiu', _anchor='exactlocation') }}"
+                  class="nav-link"
+                  >LOGOUT</a
+                >
               </li>
             </ul>
           </div>
@@ -82,7 +98,7 @@
               <div class="table-data">
                 <div class="signform-btn">
                   <button
-                    class="signform-submit-btn-green"
+                    class="signform-submit-btn-green-req"
                     id="signform-submit-btn-green"
                     type="submit"
                     value="{{row[0]}}"
@@ -109,7 +125,7 @@
     debugger;
     var idt = "";
     // open popup when button is clicked
-    $("#signform-submit-btn-green").click(function () {
+    $(".signform-submit-btn-green-req").click(function () {
       idt = $(this).val();
       // $("#main").animate({ opacity: 0 }, 2000);
       $(".popup").show();

@@ -226,7 +226,7 @@ footer {
   font-size: 14px;
   padding: 20px;
   text-align: center;
-  height: 60px;
+  height: 20px;
   bottom: 0;
   width: 100%;
   position: absolute;
@@ -503,6 +503,37 @@ input[type="password"] {
 .signform-btn {
   display: inline-flexbox;
 }
+.signform-btn1 {
+  display: inline-flexbox;
+}
+
+/*signupform submit*/
+.signform-submit-btn1 {
+  width: 40%;
+  padding:15px;
+  background-color: #ff4a4a;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  padding-right: 20px;
+  margin: 0 20px;
+}
+
+/* Submit Button -signup*/
+.signform-submit-btn-green1 {
+  width: 40%;
+  padding: 15px;
+  background-color: #22b087;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
 
 /* Submit Button */
 .signform-submit-btn {
@@ -534,7 +565,7 @@ input[type="password"] {
 
 .signform-submit-btn-green a {
 
-  color: #fff;
+  color: #f7f7f7;
 }
 
 .signform-submit-btn a {
@@ -650,7 +681,6 @@ input[type="password"] {
 .header__item {
   flex: 1 1 20%;
   text-align: center;
-  color: black;
 }
 
 .header__item {
@@ -785,7 +815,6 @@ input[type="password"] {
   transform: translate(-50%, -50%);
   padding: 20px;
   background-color: whitesmoke;
-  border: 1px solid black;
   border-radius: 10px;
 }
 
@@ -806,9 +835,9 @@ input[type="password"] {
   font-weight: bold;
 }
 
+
 .label-box {
-  display: inline-block;
-  background-color: #4CAF50; /* Green color */
+  display: inline-block; /* Green color */
   color: white;
   padding: 5px 10px;
   border-radius: 4px;
@@ -820,3 +849,275 @@ input[type="password"] {
   display: inline-block;
   vertical-align: middle;
 }
+.loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.content {
+  margin-top: 30px;
+}
+
+/* Adjustments for mobile screens */
+@media only screen and (max-width: 480px) {
+  .loader {
+    width: 10px;
+    height: 10px;
+  }
+}
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid;
+  border-top: none;
+}
+.carousel {
+  margin-top: 5%;
+  position: relative;
+  overflow: hidden;
+  word-wrap: break-word;
+  height: 40%;
+  min-height: 20%;
+}
+
+.carousel-wrapper {
+  overflow-x: scroll;
+  
+
+}
+
+.carousel-controls {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  
+}
+
+.card {
+  /* card styles */
+  display: inline-block;
+  width: 60%;
+  padding-left: 2%;
+  margin-left: 30%;
+
+
+}
+
+.card .p{
+  word-wrap: break-word;
+}
+
+.slide-photos{
+  height: 40%;
+  display: flex;
+}
+.slide-photos h1{
+  color: cadetblue;
+  position: relative;
+}
+.carousel {
+  margin-top: 5%;
+  width: 100vw;
+  height: 50vh;
+  position: relative;
+}
+
+.carousel > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: 200ms opacity ease-in-out;
+  transition-delay: 200ms;
+}
+
+.card > img {
+  display: block;
+  width: 60%;
+  height: 60%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card[data-active] {
+  opacity: 1;
+  z-index: 1;
+  transition-delay: 0ms;
+}
+
+.carousel-button {
+  position: absolute;
+  z-index: 2;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  top: 40%;
+  left: 10%;
+  right: 20%;
+  transform: translateY(-50%);
+  color: palevioletred;
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+}
+
+.carousel-button:hover,
+.carousel-button:focus {
+  color: black;
+}
+
+
+.carousel-button.prev {
+  margin-left: 60%;
+}
+
+.carousel-button.next {
+  margin-right: 40%;
+}
+
+@media only screen and (max-width: 767px) {
+  .popup {
+    max-width: 25%;
+    height: 40%;
+    font-size: 0.8rem;
+  }
+
+  .signform-submit-btn-green,.signform-submit-btn{
+    font-size: 0.6rem;
+  }
+
+}
+
+input:invalid {
+  border-color: red;
+}
+.error-icon {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.error-icon::before,
+.error-icon::after {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background-color: #ff0000;
+}
+
+.error-icon::before {
+  transform: rotate(45deg);
+}
+
+.error-icon::after {
+  transform: rotate(-45deg);
+}
+
+ul.tabs {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.tabs li {
+  display: inline-block;
+  width: 100%;
+}
+
+ul.tabs li a {
+  display: block;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+}
+
+ul.tabs li a:hover {
+  background-color: #eee;
+  color: #000;
+}
+
+div.tab-content {
+  display: flexbox ;
+}
+
+div.tab-content:nth-child(1) {
+  display: block;
+}
+.tab2{
+  display: none;
+}
+.tab1{
+  display: none;
+}
+

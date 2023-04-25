@@ -22,26 +22,88 @@
         <div class="nav-menu">
           <ul class="nav-list">
             <li class="nav-item">
-              <a href="Index.html" class="nav-link">HOME</a>
+              <a
+                href="{{ url_for('.Dashboard', _anchor='exactlocation') }}"
+                class="nav-link"
+                >DASHBOARD</a
+              >
             </li>
             <li class="nav-item">
-              <a href="Mission.html" class="nav-link">HISTORY</a>
+              <a
+                href="{{ url_for('.Requestlist', _anchor='exactlocation') }}"
+                class="nav-link"
+                >REQUEST POOL</a
+              >
             </li>
             <li class="nav-item">
-              <a href="AboutUs.html" class="nav-link">ABOUT</a>
+              <a
+                href="{{ url_for('.Donationlist', _anchor='exactlocation') }}"
+                class="nav-link"
+                >DONATION POOL</a
+              >
             </li>
             <li class="nav-item">
-              <a href="Contact.html" class="nav-link">CONTACT</a>
+              <a
+                href="{{ url_for('.homeiu', _anchor='exactlocation') }}"
+                class="nav-link"
+                >LOGOUT</a
+              >
             </li>
           </ul>
         </div>
       </div>
     </nav>
+   
+    <div class="conati" id = "jol">
+      
+      <button  id ="link1" type="button">REQUESTS</button>
+     <button  id="link2" type="button">DONATIONS</button>
+   
+      
+      <div class="tab-content">
+        <div id="tab1">
 
-    <div class="conati">
+          
       <h1>My Requests</h1>
 
-      <p>No Requests</p>
+
+      <div>
+        <div class="table">
+          <div class="table-header">
+            <div class="header__item">
+              <a id="name" class="filter__link" href="#">Name</a>
+            </div>
+            <div class="header__item">
+              <a id="wins" class="filter__link filter__link--number" href="#">Location</a>
+            </div>
+            <div class="header__item">
+              <a id="wins" class="filter__link filter__link--number" href="#">Quantity</a>
+            </div>
+            <div class="header__item">
+              <a id="wins" class="filter__link filter__link--number" href="#">Contact</a>
+            </div>
+            <div class="header__item">
+              <a id="wins" class="filter__link filter__link--number" href="#">Status</a>
+            </div>
+          </div>
+          <div class="table-content">
+
+            {% for row in requestlist %}
+            <div class="table-row">
+              <div class="table-data">{{row[1]}}</div>
+              <div class="table-data">{{row[2]}}</div>
+              <div class="table-data">{{row[3]}}</div>
+              <div class="table-data">{{row[4]}}</div>
+              <div class="table-data">{{row[7]}}</div> 
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+           
+      <h1>Accepted Requests</h1>
+
 
       <div>
         <div class="table">
@@ -61,7 +123,7 @@
           </div>
           <div class="table-content">
 
-            {% for row in requestlist %}
+            {% for row in acceptedrequestlist %}
             <div class="table-row">
               <div class="table-data">{{row[1]}}</div>
               <div class="table-data">{{row[2]}}</div>
@@ -82,57 +144,118 @@
           </button>
         </div>
       </div>
-      <div class="alink">
-        <a href="{{ url_for('.Requestlist', _anchor='exactlocation') }}">See all Requests</a>
+
+        </div>
+        <div id="tab2" class="tab2" >
+          <h1>My Donations</h1>
+      
+          <div>
+            <div class="table">
+              <div class="table-header">
+                <div class="header__item">
+                  <a id="name" class="filter__link" href="#">Name</a>
+                </div>
+                <div class="header__item">
+                  <a id="wins" class="filter__link filter__link--number" href="#">Location</a>
+                </div>
+                <div class="header__item">
+                  <a id="wins" class="filter__link filter__link--number" href="#">Quantity</a>
+                </div>
+                <div class="header__item">
+                  <a id="wins" class="filter__link filter__link--number" href="#">Contact</a>
+                </div>
+                <div class="header__item">
+                  <a id="wins" class="filter__link filter__link--number" href="#">Status</a>
+                </div>
+              </div>
+              <div class="table-content">
+    
+                {% for row in donationlist %}
+                <div class="table-row">
+                  <div class="table-data">{{row[1]}}</div>
+                  <div class="table-data">{{row[2]}}</div>
+                  <div class="table-data">{{row[3]}}</div>
+                  <div class="table-data">{{row[4]}}</div>
+                  <div class="table-data">{{row[7]}}</div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <h1>Accepted Donations</h1>
+      
+          <div>
+            <div class="table">
+              <div class="table-header">
+                <div class="header__item">
+                  <a id="name" class="filter__link" href="#">Name</a>
+                </div>
+                <div class="header__item">
+                  <a id="wins" class="filter__link filter__link--number" href="#">Location</a>
+                </div>
+                <div class="header__item">
+                  <a id="wins" class="filter__link filter__link--number" href="#">Quantity</a>
+                </div>
+                <div class="header__item">
+                  <a id="wins" class="filter__link filter__link--number" href="#">Contact</a>
+                </div>
+              </div>
+              <div class="table-content">
+    
+                {% for row in accepteddonationlist %}
+                <div class="table-row">
+                  <div class="table-data">{{row[1]}}</div>
+                  <div class="table-data">{{row[2]}}</div>
+                  <div class="table-data">{{row[3]}}</div>
+                  <div class="table-data">{{row[4]}}</div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+    
+          <div class="btn-left">
+            <div class="signform-btn">
+              <button class="signform-submit-btn-green">
+                <a  href="{{ url_for('.createDonation', _anchor='exactlocation') }}">MAKE DONATION</a>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+  
+
     </div>
 
     <div class="conati">
-      <h1>My Donations</h1>
-      <p>No Donations</p>
-      
-      <div>
-        <div class="table">
-          <div class="table-header">
-            <div class="header__item">
-              <a id="name" class="filter__link" href="#">Name</a>
-            </div>
-            <div class="header__item">
-              <a id="wins" class="filter__link filter__link--number" href="#">Location</a>
-            </div>
-            <div class="header__item">
-              <a id="wins" class="filter__link filter__link--number" href="#">Quantity</a>
-            </div>
-            <div class="header__item">
-              <a id="wins" class="filter__link filter__link--number" href="#">Contact</a>
-            </div>
-          </div>
-          <div class="table-content">
-
-            {% for row in donationlist %}
-            <div class="table-row">
-              <div class="table-data">{{row[1]}}</div>
-              <div class="table-data">{{row[2]}}</div>
-              <div class="table-data">{{row[3]}}</div>
-              <div class="table-data">{{row[4]}}</div>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-
-      <div class="btn-left">
-        <div class="signform-btn">
-          <button class="signform-submit-btn-green">
-            <a  href="{{ url_for('.createDonation', _anchor='exactlocation') }}">MAKE DONATION</a>
-          </button>
-        </div>
-      </div>
-      <div class="alink">
-        <a  href="{{ url_for('.Donationlist', _anchor='exactlocation') }}">See all Donations</a>
-        <div>
-        </div>
-      </div>
+    </div>
 </body>
 
 </html>
+
+<script
+  type="text/javascript"
+  src="https://code.jquery.com/jquery-1.7.1.min.js"
+></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#link2').click(
+      function(e){
+        e.preventDefault();
+        debugger;
+        $('#tab1').addClass('tab1');
+        $('#tab2').removeClass('tab2');
+      }
+    )
+
+    $('#link1').click(
+      function(e){
+        e.preventDefault();
+        debugger;
+        $('#tab2').addClass('tab2');
+        $('#tab1').removeClass('tab1');
+      }
+    )
+
+  });
+</script>

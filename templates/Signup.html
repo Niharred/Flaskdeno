@@ -102,4 +102,45 @@
   type="text/javascript"
   src="https://code.jquery.com/jquery-1.7.1.min.js"
 ></script>
-<script type="text/javascript"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#join").click(function () {
+      var password = $("#password").val();
+      var confirmpassword = $("#confirm-password").val();
+      if (password !== confirmpassword) {
+        alert("Password and confirm Password must be same.");
+        return false;
+      } else {
+        var allFilled = true;
+        $("#signform input").each(function () {
+          if ($(this).val() === "") {
+            allFilled = false;
+          }
+        });
+        if (allFilled) {
+          $("#errorMsg").hide();
+
+          // $("#main").animate({ opacity: 0 }, 2000);
+          $(".popup").show();
+
+          // close popup when close button is clicked
+          $("#close-popup").click(function () {
+            $(".popup").hide();
+          });
+        } else {
+          $("#errorMsg").show();
+        }
+      }
+    });
+    $("#password").blur(function () {
+      var password = $("#password").val();
+      var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,}$/;
+      if (!regex.test(password)) {
+        alert(
+          "Password must be at least 8 characters long and contain at least    one lowercase letter, one uppercase letter, one numeric digit, and one special character."
+        );
+        return false;
+      }
+    });
+  });
+</script>

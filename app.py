@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, render_template, session, redirect, url_for
-from datetime import datetime
 import sqlite3
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.secret_key = ('FLASK_SECRET_KEY')
@@ -17,6 +17,19 @@ def test_db():
     print('Table created successfully', flush=True)
     conn.close()
     return "Table created successfully"
+
+
+@app.route("/showchart")
+def testihn_db():
+    xarray = [
+        "Africa",
+        "Asia",
+        "Europe",
+        "Latin America",
+        "North America",
+    ]
+    yarray = [2478, 5267, 734, 784, 433]
+    return render_template('chart.html', xdata=xarray, ydata=yarray)
 
 
 @app.route("/dbuser")
@@ -59,9 +72,31 @@ def tester2_db():
 
 
 @app.route("/")
-def home():
+def homeiu():
     session['uid'] = 1
-    return render_template('Index.html')
+    msgger = 0
+    msg = ''
+    return render_template('Index.html', msg=msg, msgger=msgger)
+
+
+@app.route("/Mission")
+def mission():
+    return render_template("Mission.html")
+
+
+@app.route("/Home")
+def homey():
+    return render_template("Index.html")
+
+
+@app.route("/Contact")
+def contact():
+    return render_template("Contact.html")
+
+
+@app.route("/AboutUs")
+def aboutus():
+    return render_template("AboutUs.html")
 
 
 @app.route('/acceptRequest', methods=['POST'])
@@ -76,11 +111,38 @@ def ajaxrequest():
                 uid = int(session['uid'])
                 cur = con.cursor()
                 cur.execute(
-                    "UPDATE Requests SET donorid =(?) WHERE requestid = (?)", (uid, reqid))
+                    "UPDATE Requests SET donorid =(?), status = (?) WHERE requestid = (?)", (uid, 'closed', reqid))
                 con.commit()
                 msg = "Record successfully added"
                 result = {'result': 'pass'}
                 return jsonify(result)
+        except Exception as e:
+            con.rollback()
+            msg = str(e)
+        finally:
+            con.close()
+        return jsonify(result)
+
+
+@app.route('/Logintest', methods=['POST'])
+def ajaxloginrequest():
+    data = request.get_json()
+    uname = data['uname']
+    pwd = data['pwd']
+
+    result = {'result': 'fail'}
+    if request.method == 'POST':
+        con = sqlite3.connect('database.db')
+        try:
+            with sqlite3.connect("database.db") as con:
+                uid = int(session['uid'])
+                cur = con.cursor()
+                cur.execute(
+                    "select * from Users WHERE name = (?) and password = (?)", (uname, pwd))
+                user = cur.fetchall()
+                con.commit()
+                if len(user) > 0:
+                    result = {'result': 'pass'}
         except Exception as e:
             con.rollback()
             msg = str(e)
@@ -101,7 +163,7 @@ def ajaxdonate():
                 uid = int(session['uid'])
                 cur = con.cursor()
                 cur.execute(
-                    "UPDATE Donations SET requestorid =(?) WHERE donationid = (?)", (uid, reqid))
+                    "UPDATE Donations SET requestorid =(?), status = (?) WHERE donationid = (?)", (uid, 'closed', reqid))
                 con.commit()
                 msg = "Record successfully added"
                 result = {'result': 'pass'}
@@ -123,7 +185,7 @@ def Requestlist():
                 uid = int(session['uid'])
                 cur = con.cursor()
                 cur.execute(
-                    "SELECT * FROM Requests where donorid IS NULL")
+                    "SELECT * FROM Requests where donorid IS NULL and uid!=(?)", (str(uid)))
                 con.commit()
                 requestlist = cur.fetchall()
                 msg = "Record successfully added"
@@ -144,7 +206,7 @@ def Donationlist():
                 uid = int(session['uid'])
                 cur = con.cursor()
                 cur.execute(
-                    "SELECT * FROM Donations where requestorid IS NULL")
+                    "SELECT * FROM Donations where requestorid IS NULL and uid!=(?)", str(uid))
                 con.commit()
                 donationlist = cur.fetchall()
                 msg = "Record successfully added"
@@ -158,6 +220,7 @@ def Donationlist():
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
+    msgger = ""
     if request.method == 'POST':
         con = sqlite3.connect('database.db')
         user = ''
@@ -169,9 +232,11 @@ def login():
                 cur.execute(
                     "SELECT * from Users WHERE email=(?) and password =(?)", (email, password))
                 user = cur.fetchall()
+
             con.commit()
             if len(user) > 0:
-                return render_template("Landing.html")
+                session['uid'] = user[0][0]
+                return redirect(url_for('Dashboard'))
             else:
                 return render_template("Index.html")
         except Exception as e:
@@ -179,7 +244,7 @@ def login():
             msg = str(e)
         finally:
             con.close()
-    return render_template("Index.html", msg=msg)
+    return render_template("Index.html", msg=msg, msgger=msgger)
 
 
 @app.route("/Signup")
@@ -206,9 +271,18 @@ def Dashboard():
                 con.commit()
                 requestlist = cur.fetchall()
                 cur.execute(
+                    "SELECT * FROM Requests where donorid =(?)", str(uid))
+                con.commit()
+                acceptedrequestlist = cur.fetchall()
+
+                cur.execute(
                     "SELECT * FROM Donations where uid =(?)", str(uid))
                 con.commit()
                 donationlist = cur.fetchall()
+                cur.execute(
+                    "SELECT * FROM Donations where requestorid =(?)", str(uid))
+                con.commit()
+                accepteddonationlist = cur.fetchall()
 
                 msg = "Record successfully added"
         except Exception as e:
@@ -216,7 +290,7 @@ def Dashboard():
             msg = str(e)
         finally:
             con.close()
-    return render_template('Landing.html', requestlist=requestlist, donationlist=donationlist)
+    return render_template('Landing.html', requestlist=requestlist, donationlist=donationlist, accepteddonationlist=accepteddonationlist, acceptedrequestlist=acceptedrequestlist)
 
 
 @app.route('/addrec', methods=['POST', 'GET'])
@@ -247,6 +321,7 @@ def addrec():
 def createUser():
     con = sqlite3.connect('database.db')
     msg = 'start'
+    msgger = 0
     if request.method == "POST":
         try:
             name = request.form['name']
@@ -262,13 +337,14 @@ def createUser():
                 cur.execute(
                     "INSERT INTO Users (name, email, password, gender,address,mobilenumber)VALUES(?,?,?,?,?,?)", (name, email, password, gender, address, mobilenumber))
             con.commit()
+            msgger = 1
             msg = "Account created successfully!"
         except Exception as e:
             con.rollback()
             msg = str(e)
         finally:
             con.close()
-    return render_template("Index.html", msg=msg)
+    return render_template("Index.html", msg=msg, msgger=msgger)
 
 
 @app.route('/createRequest', methods=['POST', 'GET'])
