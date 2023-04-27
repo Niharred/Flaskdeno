@@ -631,13 +631,7 @@ input[type="password"] {
     background-size: cover;
   }
 
-  .table {
-    margin-top: 10%;
-    padding-top: 10%;
-    width: 80%;
-    border: 1px solid #eee;
-    margin-left: 5%;
-  }
+  
 
   .table-header {
     display: flex;
@@ -656,7 +650,7 @@ input[type="password"] {
 }
 
 .table {
-  margin-top: 8%;
+  margin-top: 2%;
   width: 80%;
   border: 1px solid #eee;
   margin-left: 5%;
@@ -729,7 +723,7 @@ input[type="password"] {
 }
 
 .conati .alink {
-  margin-top: 2%;
+  margin-top: 5%;
   font-weight: bold;
 }
 
