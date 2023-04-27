@@ -14,7 +14,7 @@ def test_db():
     conn.execute('DROP TABLE IF EXISTS Users')
     conn.commit()
     conn.execute(
-        'CREATE TABLE Users (username TEXT, addr TEXT, email TEXT, password TEXT)')
+        'CREATE TABLE Users (uid INTEGER PRIMARY KEY, name TEXT, email TEXT,  password TEXT, gender TEXT, address TEXT,  mobilenumber TEXT)')
     print('Table created successfully', flush=True)
     conn.close()
     return "Table created successfully"
@@ -87,7 +87,9 @@ def mission():
 
 @app.route("/Home")
 def homey():
-    return render_template("Index.html")
+    msgger = 0
+    msg = ''
+    return render_template("Index.html", msg=msg, msgger=msgger)
 
 
 @app.route("/Contact")
@@ -127,6 +129,7 @@ def ajaxrequest():
 
 @app.route('/Logintest', methods=['POST'])
 def ajaxloginrequest():
+    
     data = request.get_json()
     uname = data['uname']
     pwd = data['pwd']
@@ -223,6 +226,7 @@ def Donationlist():
 def login():
     msgger = ""
     if request.method == 'POST':
+        
         con = sqlite3.connect('database.db')
         user = ''
         try:
@@ -262,6 +266,7 @@ def Register():
 def Dashboard():
 
     if request.method == 'GET':
+        
         con = sqlite3.connect('database.db')
         try:
             with sqlite3.connect("database.db") as con:
@@ -320,17 +325,18 @@ def addrec():
 
 @app.route('/createUser', methods=['POST', 'GET'])
 def createUser():
+    
     con = sqlite3.connect('database.db')
     msg = 'start'
     msgger = 0
     if request.method == "POST":
         try:
+            
             name = request.form['name']
             # addr = request.form['addr']
             email = request.form['email']
             password = request.form['password']
-            gender = 'male'
-            # gender = request.form['gender']
+            gender = request.form['gender']
             address = request.form['address']
             mobilenumber = request.form['mobilenumber']
             with sqlite3.connect("database.db") as con:
@@ -423,3 +429,6 @@ def requesti():
     cur.execute("select * from Users")
     rows = cur.fetchall()
     return render_template("list.html", rows=rows)
+
+if __name__ == "__main__":
+    app.run(debug=True)

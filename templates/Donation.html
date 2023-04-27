@@ -14,7 +14,7 @@
       <nav class="navbar">
         <div class="nav-container">
           <a href="#" class="nav-logo"
-            ><img src="Logo2.ico" alt="logo" class="logo"
+            ><img src="{{ url_for('static', filename='images/Logo2.ico') }}" alt="logo" class="logo"
           /></a>
           <div class="nav-toggle">
             <span class="nav-toggle-bar"></span>
@@ -90,6 +90,7 @@
           </div>
 
           <div class="table-content">
+            {% if donationlist %}
             {% for row in donationlist %}
             <div class="table-row">
               <div class="table-data">{{row[1]}}</div>
@@ -110,6 +111,9 @@
               </div>
             </div>
             {% endfor %}
+            {% else %}
+            <p style="text-align: center;">No Requests</p>
+            {% endif %}
           </div>
         </div>
       </div>

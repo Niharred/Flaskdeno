@@ -12,7 +12,7 @@
     <nav class="navbar">
       <div class="nav-container">
         <a href="#" class="nav-logo"
-          ><img src="Logo2.ico" alt="logo" class="logo"
+          ><img src="{{ url_for('static', filename='images/Logo2.ico') }}" alt="logo" class="logo"
         /></a>
         <div class="nav-toggle">
           <span class="nav-toggle-bar"></span>
@@ -22,16 +22,16 @@
         <div class="nav-menu">
           <ul class="nav-list">
             <li class="nav-item">
-              <a href="Index.html" class="nav-link">HOME</a>
+              <a href="{{ url_for('.homey', _anchor='exactlocation') }}" class="nav-link">HOME</a>
             </li>
             <li class="nav-item">
-              <a href="Mission.html" class="nav-link">MISSION</a>
+              <a href="{{ url_for('.mission', _anchor='exactlocation') }}" class="nav-link">MISSION</a>
             </li>
             <li class="nav-item">
-              <a href="AboutUs.html" class="nav-link">ABOUT</a>
+              <a href="{{ url_for('.aboutus', _anchor='exactlocation') }}" class="nav-link">ABOUT</a>
             </li>
             <li class="nav-item">
-              <a href="Contact.html" class="nav-link">CONTACT</a>
+              <a href="{{ url_for('.contact', _anchor='exactlocation') }}" class="nav-link">CONTACT</a>
             </li>
           </ul>
         </div>
