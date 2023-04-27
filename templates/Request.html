@@ -63,7 +63,12 @@
             </div>
             <div class="header__item">
               <a id="wins" class="filter__link filter__link--number" href="#"
-                >address</a
+                >Quantity</a
+              >
+            </div>
+            <div class="header__item">
+              <a id="wins" class="filter__link filter__link--number" href="#"
+                >Address</a
               >
             </div>
             <div class="header__item">
@@ -71,14 +76,11 @@
                 >Contact</a
               >
             </div>
+            
+            
             <div class="header__item">
               <a id="wins" class="filter__link filter__link--number" href="#"
-                >Date</a
-              >
-            </div>
-            <div class="header__item">
-              <a id="wins" class="filter__link filter__link--number" href="#"
-                >Request status</a
+                > Status</a
               >
             </div>
           </div>
@@ -89,6 +91,7 @@
             </button>
           </div>
           <div class="table-content">
+            {% if requestlist %}
             {% for row in requestlist %}
             <div class="table-row">
               <div class="table-data">{{row[1]}}</div>
@@ -109,6 +112,9 @@
               </div>
             </div>
             {% endfor %}
+            {% else %}
+            <p style="text-align:center;">No Requests</p>
+            {% endif %}
           </div>
         </div>
       </div>

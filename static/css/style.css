@@ -1,6 +1,7 @@
 * {
-  margin: 0;
-  padding: 0;
+  background-color: #008CBA
+  margin: 10px;
+  padding: 0px;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
 }
@@ -535,6 +536,7 @@ input[type="password"] {
   transition: all 0.3s ease-in-out;
 }
 
+
 /* Submit Button */
 .signform-submit-btn {
   width: 40%;
@@ -654,7 +656,7 @@ input[type="password"] {
 }
 
 .table {
-  margin-top: 10%;
+  margin-top: 8%;
   width: 80%;
   border: 1px solid #eee;
   margin-left: 5%;
@@ -720,6 +722,8 @@ input[type="password"] {
   margin-top: 10%;
 }
 
+
+
 .conati p {
   margin-top: 2%;
 }
@@ -732,6 +736,7 @@ input[type="password"] {
 .btn-left {
   margin-top: 2%;
   width: 50%;
+  
 }
 
 .info {

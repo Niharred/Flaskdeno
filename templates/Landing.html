@@ -55,9 +55,10 @@
     </nav>
    
     <div class="conati" id = "jol">
-      
-      <button  id ="link1" type="button">REQUESTS</button>
-     <button  id="link2" type="button">DONATIONS</button>
+      <div class = "signform-btn">
+      <button class = "signform-submit-btn-green"id ="link1" type="button">REQUESTS</button>
+     <button class= "signform-submit-btn-green" id="link2" type="button">DONATIONS</button>
+     </div>
    
       
       <div class="tab-content">
@@ -74,10 +75,10 @@
               <a id="name" class="filter__link" href="#">Name</a>
             </div>
             <div class="header__item">
-              <a id="wins" class="filter__link filter__link--number" href="#">Location</a>
+              <a id="wins" class="filter__link filter__link--number" href="#">Quantity</a>
             </div>
             <div class="header__item">
-              <a id="wins" class="filter__link filter__link--number" href="#">Quantity</a>
+              <a id="wins" class="filter__link filter__link--number" href="#">Location</a>
             </div>
             <div class="header__item">
               <a id="wins" class="filter__link filter__link--number" href="#">Contact</a>
@@ -87,9 +88,9 @@
             </div>
           </div>
           <div class="table-content">
-
-            {% for row in requestlist %}
-            <div class="table-row">
+            {%if requestlist%}
+              {% for row in requestlist %}
+              <div class="table-row">
               <div class="table-data">{{row[1]}}</div>
               <div class="table-data">{{row[2]}}</div>
               <div class="table-data">{{row[3]}}</div>
@@ -97,6 +98,9 @@
               <div class="table-data">{{row[7]}}</div> 
             </div>
             {% endfor %}
+            {% else %}
+            <p style="text-align: center;">No Requests</p>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -112,17 +116,19 @@
               <a id="name" class="filter__link" href="#">Name</a>
             </div>
             <div class="header__item">
-              <a id="wins" class="filter__link filter__link--number" href="#">Location</a>
+              <a id="wins" class="filter__link filter__link--number" href="#">Quantity</a>
             </div>
             <div class="header__item">
-              <a id="wins" class="filter__link filter__link--number" href="#">Quantity</a>
+              <a id="wins" class="filter__link filter__link--number" href="#">Location
+
+              </a>
             </div>
             <div class="header__item">
               <a id="wins" class="filter__link filter__link--number" href="#">Contact</a>
             </div>
           </div>
           <div class="table-content">
-
+            {% if acceptedrequestlist %}
             {% for row in acceptedrequestlist %}
             <div class="table-row">
               <div class="table-data">{{row[1]}}</div>
@@ -131,6 +137,9 @@
               <div class="table-data">{{row[4]}}</div>
             </div>
             {% endfor %}
+            {% else %}
+            <p style="text-align:center;">No Requests</p>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -169,7 +178,7 @@
                 </div>
               </div>
               <div class="table-content">
-    
+               {% if donationlist %}
                 {% for row in donationlist %}
                 <div class="table-row">
                   <div class="table-data">{{row[1]}}</div>
@@ -179,6 +188,9 @@
                   <div class="table-data">{{row[7]}}</div>
                 </div>
                 {% endfor %}
+                {% else %}
+                <p style="text-align: center;">No Requests</p>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -201,7 +213,7 @@
                 </div>
               </div>
               <div class="table-content">
-    
+                {% if accepteddonationlist %}
                 {% for row in accepteddonationlist %}
                 <div class="table-row">
                   <div class="table-data">{{row[1]}}</div>
@@ -210,6 +222,9 @@
                   <div class="table-data">{{row[4]}}</div>
                 </div>
                 {% endfor %}
+                {% else %}
+                <p style="text-align:center;">No Requests</p>
+                {% endif %}
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, render_template, session, redirect, url_for
 import sqlite3
-from flask_mail import Mail, Message
+"""import flask_mail
+from flask_mail import Mail, Message"""
 
 app = Flask(__name__)
 app.secret_key = ('FLASK_SECRET_KEY')
