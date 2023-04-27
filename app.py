@@ -224,7 +224,9 @@ def Donationlist():
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
-    msgger = ""
+   
+    msgger = 0
+    msg = ''
     if request.method == 'POST':
         
         con = sqlite3.connect('database.db')
@@ -243,7 +245,8 @@ def login():
                 session['uid'] = user[0][0]
                 return redirect(url_for('Dashboard'))
             else:
-                return render_template("Index.html")
+                msg = 'Invalid Credentials'
+                return render_template("Index.html", msg=msg, msgger=msgger)
         except Exception as e:
             con.rollback()
             msg = str(e)
