@@ -222,14 +222,12 @@ a {
 }
 
 footer {
-  background-color: #333;
-  color: #fff;
+ 
+  
   font-size: 14px;
-  padding: 20px;
+  padding: 5px;
   text-align: center;
-  height: 20px;
-  bottom: 0;
-  width: 100%;
+  
   position: absolute;
 }
 
@@ -631,8 +629,8 @@ input[type="password"] {
     background-size: cover;
   }
 
-  .table {
-    margin-top: 10%;
+  .table1 {
+    margin-top: 1%;
     padding-top: 10%;
     width: 80%;
     border: 1px solid #eee;
@@ -656,6 +654,7 @@ input[type="password"] {
 }
 
 .table {
+
   margin-top: 8%;
   width: 80%;
   border: 1px solid #eee;
