@@ -66,7 +66,7 @@
             <input type="text" id="email" name="location" required />
           </div>
           <div class="signform-group">
-            <label for="password">Capacity</label>
+            <label for="password">Quantity</label>
             <input type="text" id="password" name="quantity" required />
           </div>
           <div class="signform-group">
@@ -75,7 +75,7 @@
           </div>
           <div class="signform-btn">
             <button class="signform-submit-btn">
-              <a href="Landing.html">Cancel</a>
+              <a href="{{ url_for('.Dashboard', _anchor='exactlocation') }}">Cancel</a>
             </button>
             <button
               class="signform-submit-btn-green"
